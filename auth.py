@@ -9,13 +9,15 @@ from database import SessionLocal
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-
+from dotenv import load_dotenv
+import os
+load_dotenv()
 router= APIRouter(prefix="/auth",tags=["auth"])
 
-SECRET_KEY="9f7a3b2c4d5e6f8190ab2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8091a2b3c4d5"
-ALGORITHM="HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-REFRESH_TOKEN_EXPIRE_DAYS = 7 
+SECRET_KEY=os.getenv("SECRET_KEY")
+ALGORITHM=os.getenv("ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTES=os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
+REFRESH_TOKEN_EXPIRE_DAYS = os.getenv("REFRESH_TOKEN_EXPIRE_DAYS")
 
 pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
